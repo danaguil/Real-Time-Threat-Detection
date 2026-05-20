@@ -15,6 +15,9 @@ Our simulator (fake "attacker") → writes fake logs → we analyze logs'
 [2026-05-20 14:32:01] 45.33.32.156 — Failed SSH login for user: admin
 '''
 
+
+
+
 # creating arrays with both IPs of attacker and normal users
 attacker_ips = ["192.168.1.100", "10.0.0.50", "172.16.0.25"]
 normal_user_ips = ["192.168.1.50", "10.0.0.100", "172.16.0.50"]
