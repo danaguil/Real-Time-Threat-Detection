@@ -92,5 +92,9 @@ def generate_brute_force_burst(ip=None):
 
 # Testing function
 if __name__ == "__main__":
-    for _ in range(10):
-        print(generate_log_entry())
+    print("Started log simulation...\n")
+    # Generate a burst of brute force login attempts
+    brute_force_logs = generate_brute_force_burst()
+    for log in brute_force_logs:
+        print(log, end="")
+        time.sleep(.7)  # Simulate rapid log generation with a short delay
