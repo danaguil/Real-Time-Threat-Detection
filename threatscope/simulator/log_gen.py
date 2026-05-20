@@ -62,19 +62,33 @@ def make_event_types():
         endpoint = random.choice(["/index.html", "/home", "/dashboard"])
         message = f"GET {endpoint} HTTP/1.1"
         status = "200 OK"
+    return ip_address, message, status
 
 
 
-
+# Function to generate a log entry
 def generate_log_entry():
     # Simulate a log entry with random data
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    ip_address = random.choice(attacker_ips + normal_user_ips)
-    event_type = random.choice(["Failed SSH login", "GET /admin HTTP/1.1", "SQL: ' OR 1=1--'"])
-    status = random.choice(["success", "failure"])
+    ip_address, event_type, status = make_event_types()
+    return f"[{timestamp}] {ip_address} — {event_type} - {status}\n"
     
-    log_entry = f"[{timestamp}] {ip_address} — {event_type.capitalize()} - {status}\n"
-    return log_entry
+
+"""
+To simulate a burst of brute force login attempts, we can create a function that 
+    generates multiple log entries in quick succession, all originating from the 
+    same IP address. This will mimic the behavior of an attacker trying to guess 
+    passwords rapidly.
+"""
+def generate_brute_force_burst(ip=None):
+    ip = ip or random.choice(attacker_ips)
+    burst = [] # list to hold the generated log entries for the burst
+    for _ in range(random.randint(10, 30)):  # 10–30 rapid failures
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        user = random.choice(["admin", "root"])
+        entry = f"[{timestamp}] {ip} — Failed SSH login for user: {user} | STATUS: FAILURE\n"
+        burst.append(entry) # adding the generated log entry to the burst list
+    return burst
 
 # Testing function
 if __name__ == "__main__":
