@@ -1,11 +1,13 @@
 '''
     Will monitor the log file for new entries in real time
         and will be sent to parser.py for processing.
+    Open simulated_logs.log
+    Jump to the end of the file
+    Sit in a loop waiting for new lines to appear
+    The moment a new line is written, grab it and pass it forward
 '''
 
 # read simulate_logs.log, using generator to get that real time data
-
-import time
 
 class LogWatcher:
     def watch(self, log_file: str):
