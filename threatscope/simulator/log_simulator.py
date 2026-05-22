@@ -5,6 +5,7 @@ import time
 from logStrategy import BruteForceStrategy
 from logFactory import LogStrategyFactory
 
+
 # This module defines the LogSimulator class, which is responsible for running the simulation loop and writing formatted log entries to a file. The simulator uses the LogStrategyFactory to generate log entries based on different strategies, including various attack patterns and normal traffic. The _format_entry method formats the log data into a string that mimics real log entries, while the _generate_burst method simulates a burst of brute force login attempts from a single IP address.
 class LogSimulator:
     """
@@ -34,12 +35,19 @@ class LogSimulator:
         burst = [] # list to hold the generated log entries for the burst
 
         for _ in range(random.randint(10, 30)):
-            data = strategy.generate()
+            data = strategy.generate_log_entry() # generate a log entry using the brute force strategy
             data["ip"] = ip
             burst.append(self._format_entry(data)) # adding the formatted log entry to the burst list
 
         return burst
+    
     def run(self):
+        print("=" * 55)
+        print("  ThreatScope Log Simulator — RUNNING")
+        print(f"  Output file : {self.log_file}")
+        print(f"  Stop with   : Ctrl + C")
+        print("=" * 55 + "\n")
+    
         with open(self.log_file, "a") as f:
             while True:
                 # Generate a burst of brute force login attempts
