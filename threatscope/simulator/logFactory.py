@@ -1,5 +1,6 @@
 # logFactory.py
-# This module defines a factory for generating log entries based on different strategies, including various attack patterns and normal traffic. The factory uses a weighted random selection to simulate realistic log generation, where normal traffic is more common than attacks.
+# This module defines a factory for generating log entries 
+# based on different strategies, including various attack patterns and normal traffic. The factory uses a weighted random selection to simulate realistic log generation, where normal traffic is more common than attacks.
 
 import random
 
